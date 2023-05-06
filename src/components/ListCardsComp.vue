@@ -2,7 +2,7 @@
 
     export default{
 
-        name: "NameComp",
+        name: "ListCardsComp",
         
         components: {
             
@@ -27,8 +27,8 @@
 
 
 <template>
-    <div id="NameComp">
-        <h2>Titolo componente</h2>
+    <div id="ListCardsComp">
+
     </div>
 </template>
 
@@ -39,5 +39,13 @@
 <style lang="scss" scoped>
 
 
+#ListCardsComp {
+
+    color: white;
+    width: 10rem;
+    height: 10rem;
+    background-color: white;
+
+}
 
 </style>

@@ -1,13 +1,13 @@
 <script setup>
-import NameComp from "./components/NameComp.vue"
+import NavBarComp from "./components/NavBarComp.vue"
+import CoreComp from "./components/CoreComp.vue"
 
 </script>
 
 <template>
-  
-  <h1 class="text-primary">Ciao Federico</h1>
-  <font-awesome-icon icon="fa-solid fa-rocket" />
-  <NameComp/>
+  <NavBarComp/>
+  <CoreComp/>
+
   
 </template>
 

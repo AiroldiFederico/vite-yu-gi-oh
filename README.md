@@ -1,10 +1,10 @@
 # ESERCIZIO
 
-### Title: placeholder
+### Title: vite-yu-gi-oh
 ---
 **ALUNNO:** FEDERICO AIROLDI
 
-**DATA:** xx-xx-xxxx
+**DATA:** 06-05-2023
 
 **STATO DELL'ESERCIZIO:** Work in progress
 
