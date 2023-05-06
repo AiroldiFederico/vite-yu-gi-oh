@@ -14,7 +14,9 @@
         data(){
             return{
                
-                cards: []
+                cards: [],
+
+                NCards: 0,
 
             }
         },
@@ -26,6 +28,8 @@
                 console.log(this.cards);
                 console.log(this.cards[0].name);
                 console.log(this.cards[0].type);
+                this.NCards = this.cards.length
+        
             })
         },
 
@@ -44,7 +48,7 @@
     <div id="ListCardsComp">
 
         <div id="TopBar">
-            <p>Found n/ cards</p>
+            <p>Found {{ NCards }} cards</p>
         </div>
 
         <div id="CardContainer" class="col-12">
