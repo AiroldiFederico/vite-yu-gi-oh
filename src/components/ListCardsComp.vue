@@ -1,22 +1,36 @@
 <script>
 
+    import CardComp from './CardComp.vue';
+    import axios from 'axios'
+
     export default{
 
         name: "ListCardsComp",
         
-        components: {
-            
+        components:{
+            CardComp
         },
 
         data(){
             return{
                
-
+                cards: []
 
             }
         },
-        methods: {
 
+        created(){
+            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+            .then(response => {
+                this.cards = response.data.data;
+                console.log(this.cards);
+                console.log(this.cards[0].name);
+                console.log(this.cards[0].type);
+            })
+        },
+
+        methods:{
+    
 
         },
     }
@@ -33,8 +47,19 @@
             <p>Found n/ cards</p>
         </div>
 
-        <div id="CardContainer">
+        <div id="CardContainer" class="col-12">
+            <CardComp  
+            v-for="(item, index) in cards" :key="index"
+            :image="cards[index].card_images[0].image_url"
+            :name="cards[index].name"
+            :type="cards[index].type"
+             id="card" class="col-2"/>
 
+            <!-- <CardComp v-for="(item, index) in cards" :key="index"
+           :image="cards[index].card_images[0].image_url"
+            :name="cards[index].name"
+            :type="cards[index].type"
+            /> -->
         </div>
 
     </div>
@@ -51,9 +76,9 @@
 
     color: white;
     width: 80rem;
-    //height: 40rem;
     background-color: white;
     padding: 1rem;
+
 
     #TopBar {
         background-color: black;
@@ -62,9 +87,20 @@
     }
 
     #CardContainer {
-        background-color: rgb(212, 255, 255);
         width: 100%;
-        height: 40rem;
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-wrap: wrap;
+
+        #card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: solid rgb(119, 119, 119) 1px;
+            padding: 0.8rem;
+            background-color:#d48e38;
+            text-align: center;
+        }
     }
 
 }

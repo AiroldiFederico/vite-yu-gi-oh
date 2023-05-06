@@ -43,12 +43,12 @@
 #CoreComp {
 
     color: white;
-    background-color: rgb(218, 197, 37);
+    background-color: #d48f38;
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3rem 0rem;
 }
 
 </style>
