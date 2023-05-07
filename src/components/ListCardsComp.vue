@@ -2,6 +2,7 @@
 
     import CardComp from './CardComp.vue';
     import axios from 'axios'
+    import {store} from '../store'
 
     export default{
 
@@ -13,10 +14,9 @@
 
         data(){
             return{
-               
-                cards: [],
 
                 NCards: 0,
+                store
 
             }
         },
@@ -24,11 +24,11 @@
         created(){
             axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
             .then(response => {
-                this.cards = response.data.data;
-                console.log(this.cards);
-                console.log(this.cards[0].name);
-                console.log(this.cards[0].type);
-                this.NCards = this.cards.length
+                this.store.cards = response.data.data;
+                console.log(this.store.cards);
+                console.log(this.store.cards[0].name);
+                console.log(this.store.cards[0].type);
+                this.NCards = this.store.cards.length
         
             })
         },
@@ -53,10 +53,10 @@
 
         <div id="CardContainer" class="col-12">
             <CardComp  
-            v-for="(item, index) in cards" :key="index"
-            :image="cards[index].card_images[0].image_url"
-            :name="cards[index].name"
-            :type="cards[index].type"
+            v-for="(item, index) in store.cards" :key="index"
+            :image="store.cards[index].card_images[0].image_url"
+            :name="store.cards[index].name"
+            :type="store.cards[index].type"
              id="card" class="col-2"/>
 
             <!-- <CardComp v-for="(item, index) in cards" :key="index"
