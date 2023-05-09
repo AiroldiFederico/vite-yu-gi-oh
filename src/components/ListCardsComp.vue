@@ -1,6 +1,7 @@
 <script>
 
     import CardComp from './CardComp.vue';
+    import SelectComp from './SelectComp.vue';
     import axios from 'axios'
     import {store} from '../store'
 
@@ -9,7 +10,8 @@
         name: "ListCardsComp",
         
         components:{
-            CardComp
+            CardComp,
+            SelectComp
         },
 
         data(){
@@ -47,8 +49,9 @@
 <template>
     <div id="ListCardsComp">
 
-        <div id="TopBar">
+        <div id="TopBar" class="d-flex justify-content-between">
             <p>Found {{ NCards }} cards</p>
+            <SelectComp class="m-2"/>
         </div>
 
         <div id="CardContainer" class="col-12">
@@ -86,8 +89,12 @@
 
     #TopBar {
         background-color: black;
-        line-height: 2.5rem;
+        line-height: 2.8rem;
         text-indent: 1rem;
+
+        p {
+            margin-bottom: 0;
+        }
     }
 
     #CardContainer {
