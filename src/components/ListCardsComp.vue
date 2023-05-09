@@ -24,52 +24,14 @@
         },
 
         created(){
-            // axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
-            // .then(response => {
-            //     this.store.cards = response.data.data;
-            //     console.log(this.store.cards);
-            //     console.log(this.store.cards[0].name);
-            //     console.log(this.store.cards[0].type);
-            //     this.NCards = this.store.cards.length
-            // }),
 
-            /*modifica chimata api*/
-            // if( store.selected !== "" || "Open this select menu"){
-            //     axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=&{store.selected}`)
-            //     .then(response => {
-            //     this.store.cards = response.data.data;
-            //     this.NCards = this.store.cards.length
-            //     })
-            // } else {
-            //     axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
-            //     .then(response => {
-            //     this.store.cards = response.data.data;
-            //     console.log(this.store.cards);
-            //     console.log(this.store.cards[0].name);
-            //     console.log(this.store.cards[0].type);
-            //     this.NCards = this.store.cards.length
-                
-            //     })
-            // }
-
-            /*modifica chimata api*/
-            if( store.selected == "" || "Open this select menu"){
-
-                axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
-                .then(response => {
-                this.store.cards = response.data.data;
-                this.NCards = this.store.cards.length
-                
-                })
-            } else {
-                axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=&{this.selectedValue}`)
-                .then(response => {
-                this.store.cards = response.data.data;
-                this.NCards = this.store.cards.length
-                })
-            }
-
-
+            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+            .then(response => {
+            this.store.cards = response.data.data;
+            this.NCards = this.store.cards.length
+            })
+            
+            
             //Archetypes in array
             axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
             .then(response => {
@@ -77,18 +39,29 @@
                 console.log(store.archetypes);
             })
         },
-
+        
         methods:{
-    
 
-        },
+            callApi() {
+                /*modifica chimata api*/
+                if( store.selected !== "" || "Open this select menu"){
+        
+                    axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${encodeURIComponent(store.selected)}`)
+                    .then(response => {
+                    this.store.cards = response.data.data;
+                    this.NCards = this.store.cards.length                   
+                    })
 
-        computed: {
-        selectedValue() {
-          return this.store.selected;
+                } else {
+                    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+                    .then(response => {
+                    this.store.cards = response.data.data;
+                    this.NCards = this.store.cards.length
+                    })
+                }
+            }
         }
 }
-    }
     
 </script>
 
@@ -100,7 +73,7 @@
 
         <div id="TopBar" class="d-flex justify-content-between">
             <p>Found {{ NCards }} cards</p>
-            <SelectComp class="m-2"/>
+            <SelectComp class="m-2" @nomeEmit="callApi()"/>
         </div>
 
         <div id="CardContainer" class="col-12">
@@ -110,12 +83,6 @@
             :name="store.cards[index].name"
             :type="store.cards[index].type"
              id="card" class="col-2"/>
-
-            <!-- <CardComp v-for="(item, index) in cards" :key="index"
-           :image="cards[index].card_images[0].image_url"
-            :name="cards[index].name"
-            :type="cards[index].type"
-            /> -->
         </div>
 
     </div>
