@@ -10,6 +10,8 @@
         data(){
             return{
 
+                store
+
             }
         },
 
@@ -30,11 +32,16 @@
 
 <template>
     <div id="SelectComp">
-        <select class="form-select" aria-label="Default select example">
+        <!-- <select class="form-select" aria-label="Default select example">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
+        </select> -->
+
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option v-for="(archetype, index) in this.store.archetypes" :key="index" :value="archetype">{{ archetype }}</option>
         </select>
     </div>
 </template>
