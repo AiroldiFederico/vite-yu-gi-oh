@@ -31,7 +31,13 @@
                 console.log(this.store.cards[0].name);
                 console.log(this.store.cards[0].type);
                 this.NCards = this.store.cards.length
-        
+            }),
+
+            //Archetypes in array
+            axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+            .then(response => {
+                this.store.archetypes = response.data.map(item => item.archetype_name);
+                console.log(store.archetypes);
             })
         },
 
