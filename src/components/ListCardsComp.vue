@@ -24,14 +24,51 @@
         },
 
         created(){
-            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
-            .then(response => {
+            // axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+            // .then(response => {
+            //     this.store.cards = response.data.data;
+            //     console.log(this.store.cards);
+            //     console.log(this.store.cards[0].name);
+            //     console.log(this.store.cards[0].type);
+            //     this.NCards = this.store.cards.length
+            // }),
+
+            /*modifica chimata api*/
+            // if( store.selected !== "" || "Open this select menu"){
+            //     axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=&{store.selected}`)
+            //     .then(response => {
+            //     this.store.cards = response.data.data;
+            //     this.NCards = this.store.cards.length
+            //     })
+            // } else {
+            //     axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+            //     .then(response => {
+            //     this.store.cards = response.data.data;
+            //     console.log(this.store.cards);
+            //     console.log(this.store.cards[0].name);
+            //     console.log(this.store.cards[0].type);
+            //     this.NCards = this.store.cards.length
+                
+            //     })
+            // }
+
+            /*modifica chimata api*/
+            if( store.selected == "" || "Open this select menu"){
+
+                axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=102&offset=3')
+                .then(response => {
                 this.store.cards = response.data.data;
-                console.log(this.store.cards);
-                console.log(this.store.cards[0].name);
-                console.log(this.store.cards[0].type);
                 this.NCards = this.store.cards.length
-            }),
+                
+                })
+            } else {
+                axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=&{this.selectedValue}`)
+                .then(response => {
+                this.store.cards = response.data.data;
+                this.NCards = this.store.cards.length
+                })
+            }
+
 
             //Archetypes in array
             axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
@@ -45,6 +82,12 @@
     
 
         },
+
+        computed: {
+        selectedValue() {
+          return this.store.selected;
+        }
+}
     }
     
 </script>

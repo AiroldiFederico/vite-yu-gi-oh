@@ -39,7 +39,7 @@
             <option value="3">Three</option>
         </select> -->
 
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select" v-model="store.selected">
             <option selected>Open this select menu</option>
             <option v-for="(archetype, index) in this.store.archetypes" :key="index" :value="archetype">{{ archetype }}</option>
         </select>
